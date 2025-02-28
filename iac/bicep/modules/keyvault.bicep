@@ -50,16 +50,16 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' ={
     // Default Access Policies. Replace the ObjectID's with your user/group id
     accessPolicies:[
       { tenantId: subscription().tenantId
-        objectId: '01e16ca5-e5da-49f3-ac27-a46f1cc68ede' // Replace this with your user/group ObjectID
+        objectId: '241a47a4-847e-4f1f-96e6-9e6ac927f5fc' // Replace this with your user/group ObjectID
         permissions: {secrets:['list','get','set']}
       }
       { tenantId: subscription().tenantId
-        objectId: '688ad7c8-d7bb-4f32-884a-05601c9762a2' // Replace this with your user/group ObjectID
+        objectId: 'be445f43-b1f4-4bfb-91aa-2648f5a58279' // Replace this with your user/group ObjectID
         permissions: {secrets:['list','get','set']}
       }
       { tenantId: subscription().tenantId
-        objectId: '703595dd-9298-4ef8-ab80-a64f10e8ea07' // Replace this with your user/group ObjectID
-        permissions: {secrets:['list','get']}
+        objectId: '8d3ebe58-693a-4938-930c-eb4d50659895' // Replace this with your user/group ObjectID
+        permissions: {secrets:['list','get', 'set']}
       }
     ]
   }
@@ -78,7 +78,7 @@ resource this_keyvault_accesspolicy 'Microsoft.KeyVault/vaults/accessPolicies@20
     accessPolicies: [
       { tenantId: subscription().tenantId
         objectId: existing_purview_account.identity.principalId
-        permissions: { secrets:  ['list','get']}
+        permissions: { secrets:  ['list','get', 'set']}
 
       }
     ]

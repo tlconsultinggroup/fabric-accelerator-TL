@@ -59,7 +59,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' ={
       }
       { tenantId: subscription().tenantId
         objectId: '8d3ebe58-693a-4938-930c-eb4d50659895' // Replace this with your user/group ObjectID
-        permissions: {secrets:['list','get', 'set']}
+        permissions: {secrets:['list','get']}
       }
     ]
   }

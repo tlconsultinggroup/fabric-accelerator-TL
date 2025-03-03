@@ -32,24 +32,31 @@ resource sbdrRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-
   name: 'acdd72a7-3385-48ef-bd42-f606fba81ae7'
 }
 
-//Grant Storage Blob Data Contributor role to resource
+
+
+
+
+// Replace the role definition resources with string variables
+var sbdcRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
+var sbdrRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')
+
+// Update the role assignments to use these string IDs
 resource grant_sbdc_role 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (grant_contributor) {
-  name: guid(subscription().subscriptionId, principalId, sbdcRoleDefinition.id)
+  name: guid(subscription().subscriptionId, principalId, sbdcRoleDefinitionId)
   scope: storage_account
   properties: {
     principalType: 'ServicePrincipal'
     principalId: principalId
-    roleDefinitionId: sbdcRoleDefinition.id
+    roleDefinitionId: sbdcRoleDefinitionId
   }
 }
 
-//Grant Storage Blob Data Reader role to resource
 resource grant_sbdr_role 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (grant_reader) {
-  name: guid(subscription().subscriptionId, principalId, sbdrRoleDefinition.id)
+  name: guid(subscription().subscriptionId, principalId, sbdrRoleDefinitionId)
   scope: storage_account
   properties: {
     principalType: 'ServicePrincipal'
     principalId: principalId
-    roleDefinitionId: sbdrRoleDefinition.id
+    roleDefinitionId: sbdrRoleDefinitionId
   }
 }

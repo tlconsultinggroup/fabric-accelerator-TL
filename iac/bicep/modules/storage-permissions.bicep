@@ -34,7 +34,7 @@ resource sbdrRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-
 
 resource grant_sbdc_role 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (grant_contributor) {
   name: guid(subscription().subscriptionId, principalId, sbdcRoleDefinition.id)
-  scope: storage_account
+  parent: storage_account
   properties: {
     principalType: 'ServicePrincipal'
     principalId: principalId
@@ -44,7 +44,7 @@ resource grant_sbdc_role 'Microsoft.Authorization/roleAssignments@2020-04-01-pre
 
 resource grant_sbdr_role 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (grant_reader) {
   name: guid(subscription().subscriptionId, principalId, sbdrRoleDefinition.id)
-  scope: storage_account
+  parent: storage_account
   properties: {
     principalType: 'ServicePrincipal'
     principalId: principalId

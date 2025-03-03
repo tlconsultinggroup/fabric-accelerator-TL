@@ -34,7 +34,7 @@ param auto_pause_duration int =60
 param enable_purview bool
 
 @description('Flag to indicate whether to enable audit logging of SQL Server')
-param enable_audit bool = false
+param enable_audit bool = true
 
 @description('Resource Name of new or existing Purview Account. Specify a resource name if create_purview=true or enable_purview=true')
 param purview_resource object
@@ -111,7 +111,7 @@ module storage_permissions 'storage-permissions.bicep' = if(enable_audit)  {
     storage_name: audit_storage_name
     storage_rg: auditrg
     principalId: sqlserver.identity.principalId
-    grant_reader: false
+    grant_reader: true
     grant_contributor: true
   }
 }
